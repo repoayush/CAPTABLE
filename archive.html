@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAPTABLE · Archive</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='5' y='4' width='6' height='24' rx='1' fill='%23121b34'/%3E%3Crect x='13' y='12' width='6' height='16' rx='1' fill='%23f2a900'/%3E%3Crect x='21' y='19' width='6' height='9' rx='1' fill='%238c95aa'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="topbar" class="topbar"></header>
+<main class="wrap">
+  <div id="state" class="card empty hide"></div>
+  <div id="app" class="hide">
+    <div class="page-head">
+      <div>
+        <h1 id="title">Archive</h1>
+        <div class="sub" id="sub"></div>
+      </div>
+      <div class="right btn-row"><a class="btn" id="back" href="#">Back to dashboard</a><a class="btn" id="to-report" href="#">Report</a></div>
+    </div>
+    <div class="grid" style="grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)">
+      <div class="col">
+        <section class="card" aria-labelledby="h-tl">
+          <div class="card-h"><h2 id="h-tl">History</h2><span class="hint" id="tl-hint"></span>
+            <div class="right" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <select id="f-kind" aria-label="Filter by type" style="width:auto"></select>
+              <button type="button" class="btn sm hide" id="all-dates">Show all dates</button>
+            </div>
+          </div>
+          <div class="card-b flush"><ul class="timeline" id="timeline"></ul></div>
+        </section>
+      </div>
+      <div class="col sticky">
+        <section class="card cal" aria-labelledby="h-cal">
+          <div class="card-h"><h2 id="h-cal">Calendar</h2>
+            <div class="seg right" role="group" aria-label="Count changes by"><button type="button" data-mode="effective" aria-pressed="true">Effective date</button><button type="button" data-mode="saved" aria-pressed="false">Date saved</button></div>
+          </div>
+          <div class="card-b">
+            <div class="cal-h"><button type="button" class="btn sm" id="prev" aria-label="Previous month">‹</button><b id="month"></b><button type="button" class="btn sm" id="next" aria-label="Next month">›</button><button type="button" class="btn sm ghost" id="today">Latest</button></div>
+            <div class="cal-grid" id="cal"></div>
+            <p class="xs muted" style="margin:10px 0 0">The small number is how many changes happened that day. Click a day to see them and the cap table as it stood.</p>
+          </div>
+        </section>
+        <section class="card" aria-labelledby="h-snap">
+          <div class="card-h"><h2 id="h-snap">Cap table</h2><span class="hint" id="snap-hint"></span></div>
+          <div class="card-b flush" id="snap"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+<script type="module" src="js/page-archive.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAPTABLE · Quick calc</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='5' y='4' width='6' height='24' rx='1' fill='%23121b34'/%3E%3Crect x='13' y='12' width='6' height='16' rx='1' fill='%23f2a900'/%3E%3Crect x='21' y='19' width='6' height='9' rx='1' fill='%238c95aa'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="topbar" class="topbar"></header>
+<main class="wrap" style="padding-bottom:40px">
+  <div class="page-head">
+    <div>
+      <h1>Quick calc</h1>
+      <div class="sub">A fast "what does this offer cost me?" check. Percentages and rupees only. Nothing is saved.</div>
+    </div>
+  </div>
+  <div class="grid" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr)">
+    <div class="col">
+      <section class="card">
+        <div class="card-h"><h2>The offer</h2></div>
+        <div class="card-b" style="display:grid;gap:14px">
+          <div class="seg" role="group" aria-label="Type of offer" id="types"></div>
+          <div class="cols2" id="common"></div>
+          <div id="fields" style="display:grid;gap:14px"></div>
+        </div>
+      </section>
+    </div>
+    <div class="col">
+      <section class="card" aria-live="polite">
+        <div class="card-h"><h2>What it does to you</h2></div>
+        <div class="card-b" id="out" style="display:grid;gap:14px"></div>
+      </section>
+      <p class="xs faint" style="margin:0">Quick calc works in percentages, so it cannot round to whole shares. For the exact share counts, the cash settlement of a fractional share and the full cap table, use a startup's dashboard. CAPTABLE is a calculation aid, not legal, tax or financial advice.</p>
+    </div>
+  </div>
+</main>
+<script type="module" src="js/page-quickcalc.js"></script>
+</body>
+</html>

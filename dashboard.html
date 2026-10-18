@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAPTABLE · Dashboard</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='5' y='4' width='6' height='24' rx='1' fill='%23121b34'/%3E%3Crect x='13' y='12' width='6' height='16' rx='1' fill='%23f2a900'/%3E%3Crect x='21' y='19' width='6' height='9' rx='1' fill='%238c95aa'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="topbar" class="topbar"></header>
+<main class="wrap">
+  <div id="state" class="card empty hide"></div>
+  <div id="app" class="hide">
+    <div class="page-head">
+      <div style="flex:1;min-width:260px">
+        <input id="name" class="title-input" type="text" maxlength="80" autocomplete="off" aria-label="Startup name" placeholder="Startup name">
+        <div class="sub" id="sub" aria-live="polite"></div>
+      </div>
+      <div class="head-tools">
+        <label class="switch" title="Convertible notes are allowed only for DPIIT-recognised startups"><input id="dpiit" type="checkbox"><span>DPIIT-recognised</span></label>
+        <a class="btn" id="to-archive" href="#">Archive</a>
+        <a class="btn" id="to-report" href="#">Report</a>
+      </div>
+    </div>
+
+    <div id="kpis" class="kpis"></div>
+
+    <div class="grid">
+      <div class="col">
+        <section class="card" id="c-setup" aria-labelledby="h-setup">
+          <div class="card-h"><h2 id="h-setup">Company setup</h2><span class="badge warn hide" id="setup-lock">Locked</span><span class="hint">Authorised capital, shares and the founders</span></div>
+          <div class="card-b" id="c-setup-body"></div>
+        </section>
+
+        <section class="card" id="c-deal" aria-labelledby="h-deal">
+          <div class="card-h"><h2 id="h-deal">Funding deal</h2><span class="hint">Investors, iSAFEs and convertible notes</span><button type="button" class="btn primary right" id="add-investor" data-act="add-investor">+ Add investor</button></div>
+          <div class="card-b" style="display:grid;gap:14px">
+            <div id="offers"></div>
+            <div id="deal-options" class="hide" style="display:grid;gap:12px"></div>
+            <div id="deal-result" style="display:grid;gap:12px" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section class="card" id="c-actions" aria-labelledby="h-actions">
+          <div class="card-h"><h2 id="h-actions">Other changes</h2><span class="hint">Each one is added to your changes first</span></div>
+          <div class="card-b" id="actions"></div>
+        </section>
+
+        <section class="card hide" id="c-pending" aria-labelledby="h-pending">
+          <div class="card-h"><h2 id="h-pending">Waiting to be saved</h2></div>
+          <div class="card-b" id="c-pending-body"></div>
+        </section>
+      </div>
+
+      <div class="col sticky">
+        <section class="card" id="c-donut" aria-labelledby="h-own">
+          <div class="card-h"><h2 id="h-own">Ownership</h2>
+            <div class="right" style="display:flex;gap:8px;flex-wrap:wrap">
+              <div class="seg hide" id="cmp-seg" role="group" aria-label="Which cap table"><button type="button" data-act="cmp" data-v="live" aria-pressed="true">Live</button><button type="button" data-act="cmp" data-v="saved" aria-pressed="false">Saved</button></div>
+              <div class="seg" role="group" aria-label="Count"><button type="button" data-act="view" data-v="fd" aria-pressed="true">Fully diluted</button><button type="button" data-act="view" data-v="issued" aria-pressed="false">Issued only</button></div>
+            </div>
+          </div>
+          <div class="card-b"><div id="donut"></div></div>
+        </section>
+
+        <section class="card" aria-labelledby="h-table">
+          <div class="card-h"><h2 id="h-table">Cap table</h2><span class="hint">Live. The Saved column is what is stored now.</span></div>
+          <div class="card-b flush" id="table"></div>
+        </section>
+
+        <section class="card" aria-labelledby="h-wait">
+          <div class="card-h"><h2 id="h-wait">Waiting deals</h2><span class="hint">iSAFEs and notes that are not shares yet</span></div>
+          <div class="card-b">
+            <div id="w-head" class="hide" style="margin-bottom:10px">
+              <div class="field"><label for="w-pre">Assumed pre-money of the next priced round</label>
+                <div class="prefix"><span>₹</span><input id="w-pre" type="text" inputmode="decimal" class="num-in" autocomplete="off"></div>
+                <span class="hint">Only to preview how many shares each waiting deal would become. It is not saved.</span></div>
+            </div>
+            <div id="w-list"></div>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="h-money">
+          <div class="card-h"><h2 id="h-money">Money: share capital and premium</h2></div>
+          <div class="card-b" id="money"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="savebar" class="savebar hide">
+  <div class="savebar-in">
+    <div class="status"><span class="pulse ok" id="sb-pulse"></span><div id="sb-text"></div></div>
+    <button type="button" class="btn ghost hide" id="sb-discard">Discard</button>
+    <button type="button" class="btn primary lg" id="sb-save" disabled>Save changes</button>
+  </div>
+</div>
+<script type="module" src="js/page-dashboard.js"></script>
+</body>
+</html>
